@@ -34,7 +34,7 @@ end
 if node['midokura']['cassandras']
   cassandra_host_list = node['midokura']['cassandras'].join(',')
   execute "Set cassandra nodes in midolman.conf" do
-    command "sed -i 's/^servers.*/servers = #{cassandra_host_list}/g' /etc/midolman/midolman.conf"
+    command "echo 'cassandra.servers : #{cassandra_host_list}' | mn-conf set -t default"
   end
 end
 
